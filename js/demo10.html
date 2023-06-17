@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			/**
+			 * 数字：除了0和Nun都是true
+			 * 字符串：除了空串都是false
+			 * null和undefined都会转为false
+			 * 对象也会转换为true
+			 */
+			var a = 123;
+			a = -123;
+			a = 0;
+			a = " ";
+			a = Boolean(a);
+			console.log(typeof a);
+			console.log(a);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

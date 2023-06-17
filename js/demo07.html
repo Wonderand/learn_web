@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript">
+			/**
+			 * 强制类型转换
+			 * 一般将其他数据类型转为 Sting number Booblean
+			 * 方式一：
+			 * 		调用被装换类型的tostring()方法
+			 * 		该方法有返回值
+			 * 方式二：
+			 * 		调用String函数，并将被转换的参数传给他
+			 * 		相当于number 和 booblean的tostring
+			 */
+			var a = 123;	
+			//a = true;
+			// a = null;
+			// a = undefined;//null和undefined没有tostring方法
+			var a = a.toString();//可以将a转换为String
+			console.log(a);
+			console.log(typeof a);
+			//console.log(b);
+			var b = 1234;
+			
+			b =undefined;
+			b = String(b); 
+			console.log(typeof b)
+			console.log(a);
+		</script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
