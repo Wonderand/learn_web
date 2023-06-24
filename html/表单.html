@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="https://search.jd.com/search" target="_blank">
+        <label for="account">账户：</label>
+        <input id="account" type="text" name="wd" value="123" maxlength="5"><br>
+        <label for="pwd">密码：</label>
+        <input id="pwd" type="password" name="pwd" value="123" id=""><br>
+        性别：
+        <label for="nan">男</label>
+        <input type="radio" name="gender" id="nan">
+        <label for="nv">女</label>
+        <input type="radio" name="gender" checked id="nv">
+        <br>
+        爱好：
+        <input type="checkbox" name="hobby" value="smoke" checked id="smoke">
+        <label for="smoke">抽烟</label>
+        <input type="checkbox" name="hobby" value="drink" id="drink">
+        <label for="drink">喝酒</label>
+        <input type="checkbox" name="hobby" value="perm" id="perm">
+        <label for="perm">烫头</label><br>
+        其他：
+        <textarea name="other" id="" cols="30" rows="10"></textarea>
+        <br>
+        籍贯：
+        <select name="place">
+            <option value="冀">河北</option>
+            <option value="鲁">山东</option>
+            <option value="晋" selected>山西</option>
+            <option value="粤">广东</option>
+        </select><br>
+        <!-- 隐藏域 -->
+        <input type="hidden" name="tag" value="123" id=""><br>
+        <button>确认</button>
+        <!-- <input type="submit" value="确认"  id=""> -->
+        <button type="reset">重置</button>
+        <!-- 普通按钮 -->
+        <button type="button">检测账户是否被注册</button>
+    </form>
+
+</body>
+</html>
