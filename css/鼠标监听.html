@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 监听鼠标滚轮事件
+    window.addEventListener('mousewheel', function (event) {
+        if (event.wheelDelta > 0) {
+            // 鼠标左键按下时，缩放
+            console.log("放大");
+            document.body.style.transform = 'scale(1.1)';
+        } else if (event.wheelDelta < 0) {
+            // 鼠标右键按下时，缩放
+            console.log("缩小");
+            document.body.style.transform = 'scale(1.1)';
+        }
+    });
+
+    // 监听键盘缩放事件
+    document.addEventListener('keydown', function (event) {
+        if (event.keyCode === 107) {
+            // 按下`+`键时，缩放
+            document.body.style.transform = 'scale(1.1)';
+        } else if (event.keyCode === 189) {
+            // 按下`-`键时，缩放
+            document.body.style.transform = 'scale(1.1)';
+        }
+    });
+</script>
+
+</html>

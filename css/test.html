@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div id="myDiv">
+        <p>我是一个<span>文本</span></p>
+        
+    </div>
+</body>
+
+<script>
+
+    var myDiv = document.getElementById("myDiv");
+
+    myDiv.addEventListener("mousedown", function (event) {
+        // 鼠标左键按下时执行的函数
+        var selectedElement = event.target;
+
+        if (selectedElement.tagName === "P") { // 如果选中的是一个段落
+            // 获取选中的文本
+            var selectedText = selectedElement.textContent;
+            console.log(selectedText);
+        } else if (selectedElement.tagName === "INPUT") { // 如果选中的是一个输入框
+            // 获取选中的值
+            var selectedValue = selectedElement.value;
+            console.log(selectedValue);
+        }
+    });
+
+    myDiv.addEventListener("mouseup", function (event) {
+        // 鼠标左键松开时执行的函数
+        console.log("松开")
+    });
+    if (confirm("请点击确认或取消")) {
+        console.log("确认");
+    } else {
+        console.log("取消");
+    }
+
+    var box = document.querySelector('.box')
+
+    // 绑定鼠标按下对象
+    box.onmousedown = function () {
+
+        // 获取鼠标在div上按下的位置
+        var e = window.event;  //接收事件对象
+        // 获取鼠标在当前事件源的位置
+        var x1 = e.offsetX
+        var y1 = e.offsetY
+
+        // 绑定移动事件
+        document.onmousemove = function () {
+
+            // 获取鼠标在浏览器中的位置 - 每个事件都有自己独特的事件对象
+            var e = window.event;
+            var x2 = e.clientX
+            var y2 = e.clientY
+
+            // 计算left和top
+            var l = x2 - x1
+            var t = y2 - y1
+
+            // 设置不能超出左上角和右上角
+            if (l < 0) {
+                l = 0
+            }
+            if (t < 0) {
+                t = 0
+            }
+            // 设置left和top的最大值 不能超过事件源本身
+            if (t > document.documentElement.clientHeight - box.offsetHeight) {
+                t = document.documentElement.clientHeight - box.offsetHeight
+            }
+            if (l > document.documentElement.clientWidth - box.offsetWidth) {
+                l = document.documentElement.clientWidth - box.offsetWidth
+            }
+
+            // 设置div的left和top
+            box.style.left = l + 'px'
+            box.style.top = t + 'px'
+        }
+    }
+    // 拖拽行为一定要记得解绑mousemove事件
+    window.onmouseup = function () {
+        document.onmousemove = null
+    }
+
+</script>
+
+</html>

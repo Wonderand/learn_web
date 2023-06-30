@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+}
+#app{
+    width: 500px;
+    height: 500px;
+    background-color: aqua;
+}
+</style>
+</head>
+<body>
+<h2>拖动 DIV 元素</h2>
+
+<p>请按住鼠标左键拖动该 DIV 元素。</p>
+
+<div id="app"> 
+    <div id="mydiv">拖我</div>
+</div>
+
+
+<script>
+// 让 DIV 元素可拖动：
+dragElement(document.getElementById("mydiv"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // 如果存在标题元素，那么它就是可拖动的区域
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // 否则，整个元素就是可拖动的区域
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // 获取鼠标指针当前位置
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // 每当鼠标指针移动时，调用 elementDrag 函数
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // 计算新的元素位置
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // 设置元素新位置
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+  confirm
+
+  function closeDragElement() {
+    // 当鼠标松开时，停止移动
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+</script>
+
+</body>
+</html>

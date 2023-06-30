@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
+
+        #draggable {
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 200px;
+            font-size: 2rem;
+        }
+        #app{
+            height: 500px;
+            width: 500px;
+            background-color: aqua;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="draggable">drag me</div>
+    </div>
+    
+</body>
+<script>
+    var isMouseDown;
+
+    draggable.addEventListener('mousedown', function () {
+        isMouseDown = true;
+    })
+
+    document.addEventListener('mousemove', function (e) {
+        if (isMouseDown) {
+            draggable.style.left = e.clientX + 'px';
+            draggable.style.top = e.clientY + 'px';
+        }
+    })
+
+    draggable.addEventListener('mouseup', function () {
+        isMouseDown = false;
+    })
+
+    draggable.addEventListener('mousedown', function (e) {
+        isMouseDown = true;
+        initX = e.offsetX;
+        initY = e.offsetY;
+    })
+
+    document.addEventListener('mousemove', function (e) {
+        if (isMouseDown) {
+            var cx = e.clientX, cy = e.clientY;
+            draggable.style.left = e.clientX - initX + 'px';
+            draggable.style.top = e.clientY - initY + 'px';
+        }
+    })
+    
+</script>
+
+</html>
