@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #help {
+            top: 75%;
+            left: 2%;
+            width: 50px;
+            height: 50px;
+            /* background-image: url("image.jpg"); */
+            background-size: cover;
+            background-position: center center;
+            opacity: 0.5;
+            animation: slide-up 1s;
+            background-size: 50% 50%;
+            max-width: 500px;
+            max-height: 500px;
+            position: fixed;
+            object-fit: cover;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 1000px;
+        }
+
+        .box {
+            background-color: #f2f2f2;
+            width: 50%;
+            padding: 20px;
+        }
+
+        .app {
+            Position: sticky;
+            top: 30%;
+            left: 75%;
+            translate: translateY(-50%);
+        }
+
+        #help_box_kj {
+            width: 200px;
+            height: 500px;
+            /* left: 20%; */
+            top: 0%;
+            position: fixed;
+            /* background-color: antiquewhite; */
+            display: none;
+            font-size: 13px;
+        }
+        .title{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <div class="container">
+            <div class="box">
+                <div id="help_box">
+                    <p>当前窗口宽度和高度：</p>
+                    <p id="demo"></p>
+                    <p>当前窗口大小相对于初始大小的百分比：</p>
+                    <p id="percentage"></p>
+
+                </div>
+            </div>
+        </div>
+        <div id="help_box_kj">
+            <div class="box-header">
+                <div class="title">
+                    快捷键说明
+                </div>
+                <div class="icon"></div>
+            </div>
+            <div class="box-body">
+                <div class="row align-middle">
+                    <div class="col-md-4">
+                        
+                        <div class="box-content">
+                            <p>Alt+b 目录书签展开和收起</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                    
+                        <div class="box-content">
+                            <p>Alt+v 我的笔记和历史笔记展开和收起</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                     
+                        <div class="box-content">
+                            <p>Alt+c 画笔和标注功能展开和收起</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                      
+                        <div class="box-content">
+                            <p>Alt+n 书签功能添加和删除</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        
+                        <div class="box-content">
+                            <p>Alt+m 标注添加和取消</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                      
+                        <div class="box-content">
+                            <p>Alt+s 选择画笔</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                      
+                        <div class="box-content">
+                            <p>Alt+0 全屏模式和退出全屏模式</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                      
+                        <div class="box-content">
+                            <p>Alt+q/s 左右旋转</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+        
+                        <div class="box-content">
+                            <p>Ctrl+鼠标滚轮/+- 放大和缩小</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+        
+                        <div accesskey="accesskey" class="box-content">
+                            <p>键盘← → 上一页和下一页</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <img id="help" src="/img/help.png" title="快捷键提示" alt="帮助">
+    </div>
+
+</body>
+
+<script>
+    var image = document.getElementById("help");
+    var src = image.getAttribute("src");
+    var box = document.getElementById("help_box_kj");
+    // element.addEventListener('mouseover', function () {
+
+    //     // console.log();
+    // });
+    image.addEventListener('mouseover', function () {
+        image.setAttribute("src", "/img/help.png");
+        console.log("111");
+        box.style.display = "block";
+
+    });
+    image.addEventListener('mouseout', function () {
+        image.setAttribute("src", "/img/help1.png");
+        box.style.display = "none";
+        console.log("222");
+    })
+    image.addEventListener("click", function () {
+        console.log("打印");
+    });
+
+    var initialWidth = window.innerWidth;
+    var initialHeight = window.innerHeight;
+
+    window.onresize = function () {
+        var currentWidth = window.innerWidth;
+        var currentHeight = window.innerHeight;
+        var widthPercentage = (currentWidth / initialWidth) * 100;
+        var heightPercentage = (currentHeight / initialHeight) * 100;
+        document.getElementById("demo").innerHTML = "宽度：" + currentWidth + "，高度：" + currentHeight;
+        document.getElementById("percentage").innerHTML = "宽度百分比：" + widthPercentage.toFixed(2) + "%，高度百分比：" + heightPercentage.toFixed(2) + "%";
+    };
+</script>
+
+</html>

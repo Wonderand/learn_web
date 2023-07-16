@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+}
+
+.box:nth-child(1) {
+  background-color: #f44336;
+}
+
+.box:nth-child(2) {
+  background-color: #4caf50;
+}
+
+.hide {
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="box">1</div>
+  <div class="box hide">2</div>
+  <textarea name="" id="" cols="30" rows="10"></textarea>
+</div>
+
+<button onclick="toggle(1)">Button1</button>
+<button onclick="toggle(2)">Button2</button>
+
+<script>
+function toggle(num) {
+    const boxes = document.querySelectorAll('.box');
+    boxes.forEach(box => box.classList.add('hide'));
+    boxes[num - 1].classList.remove('hide');
+}
+</script>
+
+</body>
+</html>

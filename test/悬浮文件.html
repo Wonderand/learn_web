@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .back-to {
+            position: relative;
+            /* 设置元素的相对定位 */
+            background-image: url('/img/帮助.png');
+            /* 设置图片路径 */
+            background-size: cover;
+            /* 设置图片大小为覆盖整个按钮 */
+            background-position: center center;
+            /* 设置图片的中心位置 */
+            border-radius: 5px;
+            /* 设置按钮的圆角边框 */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            /* 设置按钮的阴影 */
+            padding: 10px 20px;
+            /* 设置按钮的内边距 */
+            border: none;
+            /* 去除按钮的边框 */
+            cursor: pointer;
+            /* 设置按钮可点击 */
+            position: fixed;
+            /* 设置按钮在页面底部 */
+            bottom: 10px;
+            /* 设置按钮距离页面底部的距离 */
+            left: 50%;
+            /* 设置按钮距离页面左侧的距离 */
+            transform: translateX(-50%);
+            /* 设置按钮在页面左侧的位置 */
+            overflow: hidden;
+            /* 设置按钮超出页面高度的显示 */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button style="border: none;" class="back-to">
+            <img src="/img/help.png" alt="">
+        </button>
+    </div>
+
+</body>
+
+</html>
