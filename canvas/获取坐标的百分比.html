@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+<script>
+    var canvas = document.getElementById('canvas');
+    canvas.style.background = "red";
+    canvas.addEventListener('click', function (event) {
+        var rect = canvas.getBoundingClientRect();
+        var x = event.clientX - rect.left;
+        var y = event.clientY - rect.top;
+        var w = rect.right - rect.left;
+        var h = rect.bottom - rect.top;
+        var percentX = (x / w) * 100;
+        var percentY = (y / h) * 100;
+        console.log('X: ' + Math.round(percentX) + '%, Y: ' + Math.round(percentY) + '%');
+        var realX = percentX * w / 100;
+        var realY = percentY * h / 100;
+        console.log('X: ' + realX + ', Y: ' + realY);
+    });
+</script>
+
+</html>
