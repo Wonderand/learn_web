@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <canvas id="canvas"></canvas>
+    </div>
+</body>
+<script>
+    let canvas = document.getElementById('canvas');
+    canvas.style.backgroundColor = "red";
+    canvas.style.width = "500px";
+    canvas.style.height = "500px";
+    let context = canvas.getContext('2d');
+    let points = [];
+    let intervalId;
+    let lastDrawTime = Date.now();
+
+    function draw() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.beginPath();
+        context.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+            context.lineTo(points[i].x, points[i].y);
+        }
+        context.stroke();
+    }
+
+    function savePoints() {
+        // Save the points to the server
+        console.log('Saving points:', points);
+        points = [];
+    }
+
+    canvas.addEventListener('mousedown', function (event) {
+        let point = { x: event.clientX, y: event.clientY };
+        points.push(point);
+    });
+
+    intervalId = setInterval(function () {
+        if (points.length > 0) {
+            savePoints();
+            draw();
+            lastDrawTime = Date.now();
+        } else if (Date.now() - lastDrawTime > 3000) {
+            savePoints();
+            lastDrawTime = Date.now();
+        }
+    }, 100);
+
+</script>
+
+</html>
