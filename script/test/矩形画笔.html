@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../utils/konva.js"></script>
+    <meta charset="utf-8" />
+    <title>Konva Rect Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button id="button">点我开始绘制</button>
+    </div>
+    <div id="container">
+    </div>
+
+    <script>
+        let btn = document.getElementById("button");
+        let canvasWrapper = document.getElementById("container");
+        let downx, downy;
+        let upx, upy;
+        let cwWidth, cwHeight;
+        let isDraw;
+        let onDraw = false;
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let stage = new Konva.Stage({
+            container: 'container',
+            width: width,
+            height: height,
+        });
+        btn.addEventListener("click", function () {
+            if (isDraw) {
+                isDraw = false;
+            } else {
+                isDraw = true;
+            }
+            console.log("1", isDraw);
+        })
+        let layer = new Konva.Layer();
+
+        canvasWrapper.addEventListener("mousedown", function (ev) {
+            if (!isDraw) {
+                return;
+            }
+            if(onDraw){
+                return;
+            }
+            downx = ev.clientX;
+            downy = ev.clientY;
+            console.log("downx=", downx, "downy=", downy);
+            // canvasWrapper.addEventListener("mousemove", function (ev) {        
+            // })
+        });
+
+        canvasWrapper.addEventListener("mouseup", function (ev) {
+            if (!isDraw) {
+                return;
+            }
+            if(onDraw){
+                return;
+            }
+            upx = ev.clientX;
+            upy = ev.clientY;
+            cwWidth = downx > upx ? (downx - upx) : (upx - downx);
+            cwHeight = downy > upy ? (downy - upy) : (upy - downy);
+            console.log("upx=", upx, "upy=", upy);
+            let rect = new Konva.Rect({
+                x: downx > upx ? upx : downx,
+                y: downy > upy ? upy : downy,
+                width: cwWidth,
+                height: cwHeight,
+                // fill: 'null',
+                stroke: 'red',
+                draggable: true,
+                strokeWidth: 2,
+            });
+            console.log("绘制");
+            layer.add(rect);
+            stage.add(layer);
+            rect.on('mouseover', function () {
+                console.log("11111");
+                onDraw = true;
+                document.body.style.cursor = 'pointer';
+            });
+            rect.on('mouseout', function () {
+                console.log("222222");
+                onDraw = false;
+                isDraw = isDraw ? true: false;
+                document.body.style.cursor = 'default';
+            });
+        })
+    </script>
+</body>
+
+</html>
