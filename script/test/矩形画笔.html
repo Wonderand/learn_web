@@ -49,18 +49,21 @@
                 isTransform = false;
                 isDraw = true;
             }
+            if (onDraw) {
+                onDraw = false;
+            }
             console.log("1", isDraw, isTransform);
         })
         let layer = new Konva.Layer();
 
         canvasWrapper.addEventListener("mousedown", function (ev) {
+            console.log("isDraw", isDraw, "onDraw", onDraw, "isTransform", isTransform);
             if (!isDraw) {
                 return;
             }
             if (onDraw) {
                 return;
             }
-            console.log("isTransform", isTransform);
             if (isTransform) {
                 return;
             }
@@ -106,8 +109,12 @@
             if (onDraw) {
                 return;
             }
-            onDraw = true;
+            if (isTransform) {
+                return;
+            }
+            onDraw = false;
             isMouseDown = false;
+            isTransform = false;
             console.log("mouseup", isDraw);
             let transformer = new Konva.Transformer({
                 borderStrokeWidth: 2,
@@ -118,9 +125,28 @@
                 transformers.push(transformer);
                 layer.add(transformer);
                 // transformer.attachTo(rect);
+
+                rect.on('transformend', function () {
+                    console.log("transformend");
+                    // 获取矩形的缩放因子
+                    let scaleX = rect.scaleX();
+                    let scaleY = rect.scaleY();
+
+                    // 重新设置边框宽度
+                    rect.strokeWidth(2 / scaleX);
+
+                    // 调整矩形的宽度和高度为缩放后的值
+                    rect.width(rect.width() * scaleX);
+                    rect.height(rect.height() * scaleY);
+
+                    // 重置形状的缩放因子
+                    rect.scaleX(1);
+                    rect.scaleY(1);
+                    
+                    layer.draw();
+                });
             });
             stage.on('click', function (e) {
-                isTransform = true;
                 // 获取点击的目标
                 let target = e.target;
                 // 检查目标是否在 rects 数组中
@@ -140,39 +166,22 @@
                 }
                 // 如果目标不在 rects 数组中，隐藏所有的 Transformer
                 else {
+                    isTransform = false;
                     transformers.forEach(function (transformer) {
                         transformer.nodes([]);
                     });
                     layer.draw();
                 }
             });
-            rect.on('transformend', function () {
-                console.log("transformend");
-                // 获取矩形的缩放因子
-                let scaleX = rect.scaleX();
-                let scaleY = rect.scaleY();
 
-                // 重新设置边框宽度
-                rect.strokeWidth(2 / scaleX);
-
-                // 调整矩形的宽度和高度为缩放后的值
-                rect.width(rect.width() * scaleX);
-                rect.height(rect.height() * scaleY);
-
-                // 重置形状的缩放因子
-                rect.scaleX(1);
-                rect.scaleY(1);
-
-                layer.draw();
-            });
             // 移动矩形
             rect.on('mouseover', function () {
-                console.log("mouseover");
+                // console.log("mouseover");
                 onDraw = true;
                 document.body.style.cursor = 'pointer';
             });
             rect.on('mouseout', function () {
-                console.log("mouseout");
+                // console.log("mouseout");
                 onDraw = false;
                 isDraw = isDraw ? true : false;
                 document.body.style.cursor = 'default';
