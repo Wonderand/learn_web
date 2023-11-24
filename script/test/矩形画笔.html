@@ -18,6 +18,8 @@
 <body>
     <div>
         <button id="button">点我开始绘制</button>
+        <button id="deleteButton">点我删除选中矩形</button>
+
     </div>
     <div id="container">
     </div>
@@ -25,12 +27,15 @@
     <script>
         let btn = document.getElementById("button");
         let canvasWrapper = document.getElementById("container");
+        let deleteButton = document.getElementById('deleteButton');
+
         let width = window.innerWidth;
         let height = window.innerHeight;
         let isDraw;
         let onDraw = false;
         let isMouseDown = false;
         let isTransform = false;
+        let delRect;
         // 创建一个数组来存储所有的 Transformer
         let transformers = [];
         // 创建一个数组来存储所有的矩形
@@ -41,6 +46,7 @@
             width: width,
             height: height,
         });
+        let transformer = new Konva.Transformer();
         let rect;
         btn.addEventListener("click", function () {
             if (isDraw) {
@@ -121,7 +127,7 @@
             });
             layer.add(transformer);
             rects.forEach(function (rect) {
-                let transformer = new Konva.Transformer();
+
                 transformers.push(transformer);
                 layer.add(transformer);
                 // transformer.attachTo(rect);
@@ -142,36 +148,20 @@
                     // 重置形状的缩放因子
                     rect.scaleX(1);
                     rect.scaleY(1);
-                    
+
                     layer.draw();
                 });
             });
-            stage.on('click', function (e) {
-                // 获取点击的目标
-                let target = e.target;
-                // 检查目标是否在 rects 数组中
-                let index = rects.indexOf(target);
 
-                // 如果目标在 rects 数组中，显示对应的 Transformer
-                if (index !== -1) {
-                    isTransform = true;
-                    transformers.forEach(function (transformer, i) {
-                        if (i === index) {
-                            transformer.nodes([rects[i]]);
-                        } else {
-                            transformer.nodes([]);
-                        }
-                    });
-                    layer.draw();
+            stage.on('click', function (e) {
+                // 如果点击的目标是矩形，显示对应的 Transformer
+                if (e.target instanceof Konva.Rect) {
+                    transformer.nodes([e.target]);
+                } else {
+                    // 否则，隐藏所有的 Transformer
+                    transformer.nodes([]);
                 }
-                // 如果目标不在 rects 数组中，隐藏所有的 Transformer
-                else {
-                    isTransform = false;
-                    transformers.forEach(function (transformer) {
-                        transformer.nodes([]);
-                    });
-                    layer.draw();
-                }
+                layer.draw();
             });
 
             // 移动矩形
@@ -185,6 +175,48 @@
                 onDraw = false;
                 isDraw = isDraw ? true : false;
                 document.body.style.cursor = 'default';
+            });
+            // 创建一个 Transformer
+            layer.add(transformer);
+
+
+            // 在需要的时候改变 Transformer 的 nodes 属性
+            rect.on('click', function () {
+                // 获取点击的目标
+                let target = this;
+                delRect = target;
+                // 检查目标是否在 rects 数组中
+                let index = rects.indexOf(target);
+                // 如果目标在 rects 数组中，显示对应的 Transformer
+                if (index !== -1) {
+                    isTransform = true;
+                    // transformers.forEach(function (transformer) {
+                    //     transformer.nodes([]);
+                    // });
+                    transformers[index].nodes([rects[index]]);
+                    layer.draw();
+                } else {
+                    isTransform = false;
+                    transformers.forEach(function (transformer) {
+                        transformer.nodes([]);
+                    });
+                    layer.draw();
+                }
+            });
+
+            deleteButton.addEventListener('click', function () {
+                // 删除矩形
+                let index = rects.indexOf(delRect);
+                delRect.remove();
+                rects.splice(index, 1);
+                // 如果删除的矩形是当前 Transformer 的节点，清空 Transformer 的节点
+                if (transformer.nodes().includes(delRect)) {
+                    transformer.nodes([]);
+                }
+
+                layer.draw();
+                isDraw = false;
+                onDraw = false;
             });
         })
     </script>
