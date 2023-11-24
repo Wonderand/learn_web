@@ -46,7 +46,13 @@
             width: width,
             height: height,
         });
-        let transformer = new Konva.Transformer();
+        let transformer = new Konva.Transformer({
+            borderStrokeWidth: 3,
+            // 锚点设置为不可见
+            enabledAnchors: [],
+            // 取消负责旋转的锚点
+            rotateEnabled: false,
+        });
         let rect;
         btn.addEventListener("click", function () {
             if (isDraw) {
@@ -61,6 +67,7 @@
             console.log("1", isDraw, isTransform);
         })
         let layer = new Konva.Layer();
+        layer.add(transformer);
 
         canvasWrapper.addEventListener("mousedown", function (ev) {
             console.log("isDraw", isDraw, "onDraw", onDraw, "isTransform", isTransform);
@@ -122,10 +129,13 @@
             isMouseDown = false;
             isTransform = false;
             console.log("mouseup", isDraw);
-            let transformer = new Konva.Transformer({
-                borderStrokeWidth: 2,
-            });
-            layer.add(transformer);
+            // let transformer = new Konva.Transformer({
+            //     borderStrokeWidth: 2,
+            //     enabledAnchors: [],
+            //     // 取消负责旋转的锚点
+            //     rotationEnabled: false,
+            // });
+            // layer.add(transformer);
             rects.forEach(function (rect) {
 
                 transformers.push(transformer);
