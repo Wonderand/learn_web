@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML 示例</title>
+</head>
+
+<body>
+    <input type="file" id="file" accept="text/xml">
+</body>
+<script>
+    // 获取 input 元素
+    let input = document.getElementById('file');
+
+    // 当用户选择文件时，读取文件内容
+    input.addEventListener('change', function () {
+        let file = this.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                let contents = e.target.result;
+                console.log(contents);  // 打印文件内容
+            };
+            reader.readAsText(file);
+        }
+    });
+</script>
+
+</html>
