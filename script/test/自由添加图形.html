@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://unpkg.com/konva@9.2.3/konva.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Konva Image Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button id="button">点我开始绘制</button>
+        <!-- <button id="deleteButton">点我删除选中矩形</button> -->
+
+    </div>
+    <div id="container"></div>
+
+</body>
+<script>
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    var canvasWrapper = document.getElementById("container");
+    var btn = document.getElementById("button");
+    var stage = new Konva.Stage({
+        container: 'container',
+        width: width,
+        height: height,
+    });
+    let isDraw;
+    // let onDraw = false;
+    // let isMouseDown = false;
+    // let isTransform = false;
+
+    var layer = new Konva.Layer();
+    stage.add(layer);
+    var imageObj = new Image();
+    btn.addEventListener("click", function () {
+        if (isDraw) {
+            isDraw = false;
+        } else {
+            isDraw = true;
+        }
+        console.log(isDraw);
+    })
+    canvasWrapper.addEventListener("click", function (ev) {
+        if (!isDraw) {
+            return;
+        }
+        let pos = stage.getPointerPosition();
+
+        imageObj.onload = function () {
+            var yoda = new Konva.Image({
+                x: pos.x - 50,
+                y: pos.y - 50,
+                image: imageObj,
+                width: 100,
+                height: 100,
+            });
+            // add the shape to the layer
+            layer.add(yoda);
+        };
+        imageObj.src = '../image/1.jpg';
+        stage.on('mousemove', function () {
+            var mousePos = stage.getPointerPosition();
+            var x = mousePos.x - 50;
+            var y = mousePos.y - 50;
+
+            yoda.position({
+                x: x,
+                y: y
+            });
+            layer.batchDraw();
+        });
+    });
+
+
+
+    canvasWrapper.addEventListener("mousemove", function (ev) {
+        if (!isDraw) {
+            return;
+        }
+
+    });
+
+    canvasWrapper.addEventListener("mouseup", function (ev) {
+
+    });
+
+</script>
+
+</html>
