@@ -41,7 +41,6 @@
 
     var layer = new Konva.Layer();
     stage.add(layer);
-    var imageObj = new Image();
     btn.addEventListener("click", function () {
         if (isDraw) {
             isDraw = false;
@@ -50,6 +49,7 @@
         }
         console.log(isDraw);
     })
+    var imageObj = new Image();
     canvasWrapper.addEventListener("click", function (ev) {
         if (!isDraw) {
             return;
@@ -63,22 +63,23 @@
                 image: imageObj,
                 width: 100,
                 height: 100,
+                draggable: true,
             });
             // add the shape to the layer
             layer.add(yoda);
         };
         imageObj.src = '../image/1.jpg';
-        stage.on('mousemove', function () {
-            var mousePos = stage.getPointerPosition();
-            var x = mousePos.x - 50;
-            var y = mousePos.y - 50;
+        // stage.on('mousemove', function () {
+        //     var mousePos = stage.getPointerPosition();
+        //     var x = mousePos.x - 50;
+        //     var y = mousePos.y - 50;
 
-            yoda.position({
-                x: x,
-                y: y
-            });
-            layer.batchDraw();
-        });
+        //     yoda.position({
+        //         x: x,
+        //         y: y
+        //     });
+        //     layer.batchDraw();
+        // });
     });
 
 
