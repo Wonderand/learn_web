@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Konva.js Example</title>
+    <style>
+        #container {
+            border: 1px solid grey;
+        }
+    </style>
+    <script src="https://unpkg.com/konva@9.2.3/konva.min.js"></script>
+</head>
+
+<body>
+    <div>
+        Try to drag an image into the stage:
+        <br />
+        <img alt="lion" src="https://konvajs.org/assets/lion.png" draggable="true"
+            ondragstart="event.dataTransfer.setData('text/plain',null)" id="lion" />
+        <div id="container"></div>
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/konva@9.4.0/konva.min.js"></script> -->
+    <script>
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const stage = new Konva.Stage({
+            container: 'container',
+            width: width,
+            height: height,
+        });
+        const layer = new Konva.Layer();
+        stage.add(layer);
+
+        const lion = document.getElementById('lion');
+        lion.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', null);
+        });
+
+        const images = [];
+        const URLImage = ({ image }) => {
+            const img = new Image();
+            img.src = image.src;
+            img.onload = () => {
+                const konvaImage = new Konva.Image({
+                    x: image.x,
+                    y: image.y,
+                    image: img,
+                    offsetX: img.width / 2,
+                    offsetY: img.height / 2,
+                });
+                layer.add(konvaImage);
+                layer.draw();
+            };
+            return null;
+        };
+
+        var container = document.getElementById('container');
+        container.addEventListener('drop', (e) => {
+            e.preventDefault();
+            var position = stage.getPointerPosition();
+            var image = {
+                ...position,
+                src: lion.src,
+            };
+            images.push(image);
+            var newImages = [];
+            var setImages = (images) => {
+                newImages = images;
+                // do something with the new images
+            };
+            setImages(images);
+        });
+
+        container.addEventListener('mousemove', function (ev) {
+            console.log("ev",ev);
+        })
+
+        container.addEventListener('mouseup', function (ev) {
+            console.log("ev",ev);
+        })
+
+        container.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+    </script>
+</body>
+
+</html>

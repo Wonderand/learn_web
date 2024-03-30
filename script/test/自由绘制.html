@@ -1,0 +1,124 @@
+<html>
+
+<head>
+    <script src="https://unpkg.com/konva@9.2.3/konva.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Konva Free Drawing Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    Tool:
+    <select id="tool">
+        <option value="brush">铅笔</option>
+        <option value="eraser">橡皮</option>
+    </select>
+    <div id="container"></div>
+    <script>
+        var width = window.innerWidth;
+        var height = window.innerHeight - 25;
+
+        // first we need Konva core things: stage and layer
+        // 首先，我们需要 Konva 的核心要素：阶段和层
+        var stage = new Konva.Stage({
+            container: 'container',
+            width: width,
+            height: height,
+        });
+
+        var layer = new Konva.Layer();
+        stage.add(layer);
+
+        // then we are going to draw into special canvas element
+        // 然后，我们将绘制到特殊的画布元素中
+        var canvas = document.createElement('canvas');
+        canvas.width = stage.width();
+        canvas.height = stage.height();
+
+        // created canvas we can add to layer as "Konva.Image" element
+        // 我们可以将创建的画布作为 "Konva.Image "元素添加到图层中
+        var image = new Konva.Image({
+            image: canvas,
+            x: 0,
+            y: 0,
+        });
+        layer.add(image);
+
+        // Good. Now we need to get access to context element
+        // 很好。现在我们需要访问上下文元素
+        var context = canvas.getContext('2d');
+        context.strokeStyle = '#df4b26';
+        context.lineJoin = 'round';
+        context.lineWidth = 5;
+
+        var isPaint = false;
+        var lastPointerPosition;
+        var mode = 'brush';
+
+        // now we need to bind some events
+        // 现在我们需要绑定一些事件
+        // we need to start drawing on mousedown
+        // 我们需要在鼠标移动时开始绘图
+        // and stop drawing on mouseup
+        // 并在鼠标上移时停止绘制
+        image.on('mousedown touchstart', function () {
+            isPaint = true;
+            lastPointerPosition = stage.getPointerPosition();
+        });
+
+        // will it be better to listen move/end events on the window?
+        // 在窗口上监听移动/结束事件会更好吗？
+        stage.on('mouseup touchend', function () {
+            isPaint = false;
+        });
+
+        // and core function - drawing
+        // 和核心功能--绘图
+        stage.on('mousemove touchmove', function () {
+            if (!isPaint) {
+                return;
+            }
+
+            if (mode === 'brush') {
+                context.globalCompositeOperation = 'source-over';
+            }
+            if (mode === 'eraser') {
+                context.globalCompositeOperation = 'destination-out';
+            }
+            context.beginPath();
+
+            var localPos = {
+                x: lastPointerPosition.x - image.x(),
+                y: lastPointerPosition.y - image.y(),
+            };
+            context.moveTo(localPos.x, localPos.y);
+            var pos = stage.getPointerPosition();
+            localPos = {
+                x: pos.x - image.x(),
+                y: pos.y - image.y(),
+            };
+            context.lineTo(localPos.x, localPos.y);
+            context.closePath();
+            context.stroke();
+
+            lastPointerPosition = pos;
+            // redraw manually
+            // 手动重绘
+            layer.batchDraw();
+        });
+
+        var select = document.getElementById('tool');
+        select.addEventListener('change', function () {
+            mode = select.value;
+        });
+    </script>
+</body>
+
+</html>
