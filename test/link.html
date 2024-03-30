@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="#" id="imageLink">
+        <img style="display: none;" src="http://192.168.0.121:8080/szjc/file/download?fileCode=43a2ad449ccd453a91155fc1bdc9bf17.png"
+            alt="Your Image">
+            点我
+    </a>
+
+</body>
+<script>
+    document.getElementById('imageLink').addEventListener('click', function (e) {
+        e.preventDefault();
+
+        let img = new Image();
+        img.src = this.children[0].src;
+        img.style.display = 'none';
+        img.style.position = 'fixed';
+        img.style.top = '0';
+        img.style.left = '0';
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.zIndex = '1000';
+
+        document.body.appendChild(img);
+        img.style.display = 'block';
+
+        img.addEventListener('click', function () {
+            document.body.removeChild(img);
+        });
+    });
+</script>
+
+</html>
