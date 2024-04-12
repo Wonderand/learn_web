@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- KaTeX requires the use of the HTML5 doctype. Without it, KaTeX may not render properly -->
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+</head>
+
+<body>
+    <span id="math-formula1">\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}}
+        {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }</span>
+    <br>
+    <span id="math-formula2">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</span>
+    <br>
+    <span id="math-formula3">\int_a^b f(x) dx</span>
+    <br>
+    <span id="math-formula4">/\$\$([^\$]+)\$\$/g</span>
+</body>
+<script>
+    var formula1 = document.getElementById('math-formula1').innerText;
+    katex.render(formula1, document.getElementById('math-formula1'));
+    var html1 = katex.renderToString(formula1, { output: "htmlAndMathml" });
+    // console.log(html1);
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(html1, "text/html");
+    var mathml = doc.querySelector('math').outerHTML;
+
+    console.log(mathml);
+
+    var formula2 = document.getElementById('math-formula2').innerText;
+    katex.render(formula2, document.getElementById('math-formula2'));
+    var html2 = katex.renderToString(formula2);
+    console.log(html2);
+
+    var formula3 = document.getElementById('math-formula3').innerText;
+    katex.render(formula3, document.getElementById('math-formula3'));
+    var html3 = katex.renderToString(formula3);
+    console.log(html3);
+
+    var formula4 = document.getElementById('math-formula4').innerText;
+    katex.render(formula4, document.getElementById('math-formula4'));
+    var html4 = katex.renderToString(formula4);
+    console.log(html4);
+</script>
+
+</html>
