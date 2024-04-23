@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@tiptap/core": "^2.3.0",
+    "@tiptap/pm": "^2.3.0",
+    "@tiptap/starter-kit": "^2.3.0"
+  }
+}
