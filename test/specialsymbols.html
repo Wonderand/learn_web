@@ -11,11 +11,30 @@
     <span id="math-formula1">\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}}
         {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }</span>
     <br>
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <msqrt>
+            <mn>1</mn>
+        </msqrt>
+    </math><br><br><br><br>
     <span id="math-formula2">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</span>
     <br>
     <span id="math-formula3">\int_a^b f(x) dx</span>
     <br>
-    <span id="math-formula4">/\$\$([^\$]+)\$\$/g</span>
+    <span id="math-formula4">/\$\$([^\$]+)\$\$/g</span><br>
+    <div>
+        <p>这里可以是任何内容，比如
+        <p>、
+        <table>，一切由你作主！</p>
+    </div>
+
+    <div contenteditable="true">
+        这里是可编辑的内容。<math xmlns="http://www.w3.org/1998/Math/MathML">
+            <msqrt>
+                <mn>1</mn>
+            </msqrt>
+        </math><br><br><br><br>
+    </div>
+
 </body>
 <script>
     var formula1 = document.getElementById('math-formula1').innerText;

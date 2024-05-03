@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>通义千问对话框</title>
+</head>
+<body>
+    <div class="dialog-container">
+        <div class="header">通义千问</div>
+        <div class="content">
+            <div class="question-container">
+                <label for="user-question">您的问题：</label>
+                <input type="text" id="user-question" placeholder="请输入您的问题...">
+            </div>
+            <div class="answer-container">
+                <p id="bot-answer"></p>
+            </div>
+        </div>
+        <div class="footer">
+            <button id="submit-button">提交</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
