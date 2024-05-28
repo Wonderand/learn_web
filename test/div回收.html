@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expandable Div</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        #container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #sidePanel {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: transform 0.5s ease-in-out;
+            transform: translateX(100%);
+        }
+
+        #sidePanel.expanded {
+            transform: translateX(0);
+        }
+
+        #sidePanel.collapsed {
+            transform: translateX(100%);
+        }
+
+        #toggleButton {
+            position: absolute;
+            top: 10px;
+            left: -60px;
+            /* Adjust this value based on button width */
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1;
+            transform: rotate(-90deg);
+            /* Rotate button to be vertical */
+            background-image: url('./收回.svg');
+            /* Path to your SVG file */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="sidePanel" class="collapsed">
+            <button id="toggleButton"></button>
+            <p>This is the side panel content.</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('toggleButton');
+            const sidePanel = document.getElementById('sidePanel');
+
+            toggleButton.addEventListener('click', () => {
+                if (sidePanel.classList.contains('collapsed')) {
+                    sidePanel.classList.remove('collapsed');
+                    sidePanel.classList.add('expanded');
+                } else {
+                    sidePanel.classList.remove('expanded');
+                    sidePanel.classList.add('collapsed');
+                }
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>
