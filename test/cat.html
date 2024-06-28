@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Cat with Three.js - Drag and Zoom</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/DragControls.js"></script>
+    <script>
+        // Create scene, camera, and renderer
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        renderer.setClearColor("#004737"); 
+
+        // Add lighting to the scene
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(5, 10, 7.5).normalize();
+        scene.add(directionalLight);
+
+        const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
+        scene.add(ambientLight);
+
+        // Variables to store the cat model
+        let cat;
+        const initialPosition = { x: 0, y: 0, z: 0 };
+
+        // Load 3D model using GLTFLoader
+        const loader = new THREE.GLTFLoader();
+        loader.load('./munchkin_cat/scene.gltf', function (gltf) {
+            cat = gltf.scene;
+            scene.add(cat);
+
+            // Adjust cat model's scale
+            cat.scale.set(5, 5, 5);  // Scale the model up
+
+            // Center the model
+            const box = new THREE.Box3().setFromObject(cat);
+            const boxCenter = box.getCenter(new THREE.Vector3());
+            cat.position.sub(boxCenter); // move model to origin
+            cat.position.y += (box.max.y - box.min.y) / 2; // adjust Y to keep model on the ground
+
+            // Initialize DragControls
+            const dragControls = new THREE.DragControls([cat], camera, renderer.domElement);
+            dragControls.addEventListener('dragstart', function (event) {
+                controls.enabled = false;
+            });
+            dragControls.addEventListener('dragend', function (event) {
+                controls.enabled = true;
+            });
+
+            // Animate the cat model
+            const animate = function () {
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+            };
+            animate();
+        }, undefined, function (error) {
+            console.error(error);
+        });
+
+        // Set camera position
+        camera.position.set(0, 1, 10);  // Adjust camera position to better view the model
+
+        // Initialize OrbitControls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+        controls.dampingFactor = 0.25;
+        controls.screenSpacePanning = false;
+        controls.maxPolarAngle = Math.PI / 2;
+
+        // Handle window resize
+        window.addEventListener('resize', function () {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
+
+    </script>
+</body>
+
+</html>

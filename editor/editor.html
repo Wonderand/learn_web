@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/paragraph@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/image@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script><!-- Image -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"></script><!-- Delimiter -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script><!-- List -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script><!-- Checklist -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script><!-- Quote -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script><!-- Code -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script><!-- Embed -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/table@latest"></script><!-- Table -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script><!-- Link -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script><!-- Warning -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code -->
+
+    <style>
+        #editorjs {
+            border: 1px solid #0c0909;
+            /* text-align: center; */
+        }
+
+        #editorjs h1 {
+            text-align: center;
+        }
+
+        .simple-image {
+            padding: 20px 0;
+        }
+
+        .simple-image input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e4e4e4;
+            border-radius: 3px;
+            outline: none;
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="editorjs">
+        <h1>数字教材编辑系统</h1>
+    </div>
+    <button onclick="saveContent()">保存内容</button>
+</body>
+<script>
+    const fontToolConfig = {
+        sizes: [12, 14, 16, 18, 20, 22, 24],
+        fonts: ['Arial', 'Helvetica', 'sans-serif'],
+    };
+    // 初始化 Editor.js
+    const editor = new EditorJS({
+        holder: 'editorjs',
+
+        _acceptTuneView() {
+            this.settings.forEach(tune => {
+                this.wrapper.classList.toggle(tune.name, !!this.data[tune.name]);
+
+                if (tune.name === 'stretched') {
+                    this.api.blocks.stretchBlock(this.api.blocks.getCurrentBlockIndex(), !!this.data.stretched);
+                }
+            });
+        },
+        tools: {
+            /**
+             * Each Tool is a Plugin. Pass them via 'class' option with necessary settings {@link docs/tools.md}
+             */
+            header: {
+                class: Header,
+                inlineToolbar: ['marker', 'link'],
+                config: {
+                    placeholder: 'Header'
+                },
+                shortcut: 'CMD+SHIFT+H'
+            },
+
+            /**
+             * Or pass class directly without any configuration
+             */
+            image: SimpleImage,
+
+            list: {
+                class: List,
+                inlineToolbar: true,
+                shortcut: 'CMD+SHIFT+L'
+            },
+
+            checklist: {
+                class: Checklist,
+                inlineToolbar: true,
+            },
+
+            quote: {
+                class: Quote,
+                inlineToolbar: true,
+                config: {
+                    quotePlaceholder: 'Enter a quote',
+                    captionPlaceholder: 'Quote\'s author',
+                },
+                shortcut: 'CMD+SHIFT+O'
+            },
+
+            warning: Warning,
+
+            marker: {
+                class: Marker,
+                shortcut: 'CMD+SHIFT+M'
+            },
+
+            code: {
+                class: CodeTool,
+                shortcut: 'CMD+SHIFT+C'
+            },
+
+            delimiter: Delimiter,
+
+            inlineCode: {
+                class: InlineCode,
+                shortcut: 'CMD+SHIFT+C'
+            },
+
+            linkTool: LinkTool,
+
+            embed: Embed,
+
+            table: {
+                class: Table,
+                inlineToolbar: true,
+                shortcut: 'CMD+ALT+T'
+            },
+
+        },
+        data: {
+            time: 1552744582955,
+            blocks: [
+                {
+                    type: "image",
+                    data: {
+                        url: "https://cdn.pixabay.com/photo/2017/09/01/21/53/blue-2705642_1280.jpg",
+                        caption: '这里是标题字段',
+                        withBorder: false,
+                        withBackground: true,
+                        stretched: false
+                    }
+                },
+                {
+                    type: "image",
+                    data: {
+                        url: "https://lchml.com/lc-icon.jpg"
+                    }
+                },
+                {
+                    "id": "oUq2g_tl8y",
+                    "type": "header",
+                    "data": {
+                        "text": "Editor.js",
+                        "level": 2
+                    }
+                },
+                {
+                    "id": "zbGZFPM-iI",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text. Source code of the page contains the example of connection and configuration."
+                    }
+                },
+                {
+                    "id": "qYIGsjS5rt",
+                    "type": "header",
+                    "data": {
+                        "text": "Key features",
+                        "level": 3
+                    }
+                },
+                {
+                    "id": "XV87kJS_H1",
+                    "type": "list",
+                    "data": {
+                        "style": "unordered",
+                        "items": [
+                            "It is a block-styled editor",
+                            "It returns clean data output in JSON",
+                            "Designed to be extendable and pluggable with a simple API"
+                        ]
+                    }
+                },
+                {
+                    "id": "AOulAjL8XM",
+                    "type": "header",
+                    "data": {
+                        "text": "What does it mean «block-styled editor»",
+                        "level": 3
+                    }
+                },
+                {
+                    "id": "cyZjplMOZ0",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Workspace in classic editors is made of a single contenteditable element, used to create different HTML markups. Editor.js <mark class=\"cdx-marker\">workspace consists of separate Blocks: paragraphs, headings, images, lists, quotes, etc</mark>. Each of them is an independent contenteditable element (or more complex structure) provided by Plugin and united by Editor's Core."
+                    }
+                }
+            ],
+            "version": "2.8.1"
+        },
+        i18n: {
+            messages: {
+                ui: {
+                    blockTunes: {
+                        toggler: {
+                            'Click to tune': '点击转换'
+                        }
+                    },
+                    inlineToolbar: {
+                        converter: {
+                            'Convert to': '转换'
+                        }
+                    },
+                    toolbar: {
+                        toolbox: {
+                            Add: '工具栏添加'
+                        }
+                    },
+                    popover: {
+                        'Filter': '过滤',
+                        'Nothing found': '找不到',
+                        "Enter a code": "输入代码"
+                    }
+                },
+                toolNames: {
+                    "Text": "文本",
+                    "Heading": "标题",
+                    "List": "列表",
+                    "Warning": "警告",
+                    "Checklist": "清单",
+                    "Quote": "引用",
+                    "Code": "代码",
+                    "Delimiter": "分隔符",
+                    "Raw HTML": "原始 HTML",
+                    "Table": "表格",
+                    "Link": "链接",
+                    "Marker": "标记",
+                    "Bold": "粗体",
+                    "Italic": "斜体",
+                    "InlineCode": "内联代码",
+                    "Image": "图片"
+                },
+                tools: {
+                    "paragraph": {
+                        'Press Tab': '输入内容',
+                    },
+                    "warning": {  // <-- 'Warning' tool will accept this dictionary section
+                        "Title": "标题",
+                        "Message": "消息",
+                    },
+                    "link": {
+                        "Add a link": "添加连接"
+                    },
+                    "code": {
+                        "Enter a code": "输入代码"
+                    },
+                    "image": {
+                        "Add border": "添加边框",
+                        "With border": "有边框",
+                        "Stretch image": "拉伸图像",
+                        "With background": "有背景",
+                        "Add background": "添加背景"
+                    },
+                    "list": {
+                        "Ordered": "有序",
+                        "Unordered": "无序"
+                    }
+                },
+                blockTunes: {
+                    // Section allows to translate Block Tunes
+                    "delete": {
+                        "Delete": "删除",
+                        "Click to delete": "点击删除"
+                    },
+                    "moveUp": {
+                        "Move up": "上移"
+                    },
+                    "moveDown": {
+                        "Move down": "下移"
+                    },
+                },
+            }
+        },
+        // 你可以在这里添加其他配置
+    });
+
+    // 保存内容的函数
+    function saveContent() {
+        editor.save().then((outputData) => {
+            console.log('保存的内容：', outputData);
+            alert('内容已保存，请查看控制台！');
+        }).catch((error) => {
+            console.log('保存出错：', error);
+        });
+    }
+</script>
+
+</html>
