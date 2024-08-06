@@ -1,62 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Preview</title>
     <style>
-        .toolbar {
-            position: fixed;
-            left: -100px;
-            /* hide the toolbar */
-            top: 50%;
-            transform: translateY(-50%);
-            transition: left 0.5s;
-            /* add a transition effect */
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
 
-        .toolbar:hover {
-            left: 0;
-            /* slide out the toolbar */
+        .search-container {
+            display: flex;
+            align-items: center;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            background-color: #fff;
+            padding: 5px 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
         }
 
-        .toolbar button {
-            display: block;
-            margin-bottom: 10px;
-            background-color: #4CAF50;
-            color: white;
-            padding: 16px;
-            font-size: 24px;
+        .search-container:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-input {
             border: none;
-            border-radius: 10%;
-            cursor: pointer;
-
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            outline: none;
+            padding: 10px;
+            border-radius: 25px;
+            font-size: 16px;
+            width: 200px;
         }
 
-        /* .toolbar:hover {
-            background-color: #2E8B57;
-        } */
+        .search-input::placeholder {
+            color: #aaa;
+        }
 
-        #box {
-            width: 70%;
-            height: 2000px;
-            margin: 0 auto;
-            background-color: rebeccapurple;
+        .search-button {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-button:hover {
+            background-color: #f0f0f0;
         }
     </style>
 </head>
 
-<body>
-    <div id="box">
-
+<body style="margin: 0; height: 100%;">
+    <div class="search-container">
+        <input type="text" placeholder="Search..." class="search-input">
+        <button class="search-button">🔍</button>
     </div>
-
-    <div class="toolbar">
-        <button>Button 1</button>
-        <button>Button 2</button>
-        <button>Button 3</button>
-        <button>Button 4</button>
-    </div>
-
 </body>
 
 </html>

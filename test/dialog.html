@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 引入Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 引入Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.2.0/css/fileinput.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.2.0/js/fileinput.min.js"></script>
+   
+
+    <!-- 模态对话框 -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel">上传图片</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- 文件上传组件 -->
+                    <div class="file-loading">
+                        <input id="imageUpload" type="file" name="imageUpload" accept="image/*" multiple>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="uploadSubmit">上传</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#uploadModal').modal('show');
+            $('#imageUpload').fileinput({
+                theme: 'fas', // 使用Font Awesome图标
+                maxFileSize: 1024, // 最大文件大小限制为1MB
+                maxFileCount: 5, // 最多允许上传5个文件
+                allowedFileExtensions: ['jpg', 'png', 'gif'], // 允许的文件扩展名
+                showPreview: true, // 显示预览
+                showCaption: true, // 显示标题
+                showRemove: true, // 显示移除按钮
+                showUpload: false, // 不显示上传按钮，因为我们将在模态框外处理上传逻辑
+                overwriteInitial: false, // 不覆盖初始文件
+                initialPreviewAsData: true // 将初始预览视为数据
+            });
+
+            // 当点击上传按钮时，你可以在这里处理上传逻辑
+            $('#uploadSubmit').click(function () {
+                var files = $('#imageUpload')[0].files;
+                // 处理文件上传逻辑
+                console.log(files);
+            });
+        });
+    </script>
+</body>
+
+</html>

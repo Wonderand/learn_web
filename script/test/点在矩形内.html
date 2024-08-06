@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="rect" style="width: 100px; height: 100px; background-color: red;"></div>
+</body>
+<script>
+    var rectElement = document.getElementById("rect");
+    rectElement.style.position = "absolute";
+    rectElement.style.left = "150px";
+    rectElement.style.top = "100px";
+
+    // 计算rect对象的值
+    var rect = {
+        left: parseInt(rectElement.style.left),
+        top: parseInt(rectElement.style.top),
+        right: parseInt(rectElement.style.left) + rectElement.offsetWidth,
+        bottom: parseInt(rectElement.style.top) + rectElement.offsetHeight
+    };
+
+    function isPointInRect(point, rect) {
+        var x = point.x,
+            y = point.y;
+        return (
+            x >= rect.left &&
+            x <= rect.right &&
+            y >= rect.top &&
+            y <= rect.bottom
+        );
+    }
+
+    // 使用示例
+    document.addEventListener('click', function (event) {
+        var point = { x: event.clientX, y: event.clientY };
+        console.log(point);
+        if (isPointInRect(point, rect)) {
+            console.log('点击在矩形内');
+        } else {
+            console.log('点击在矩形外');
+        }
+    });
+</script>
+
+</html>
