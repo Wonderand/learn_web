@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="./core/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="./core/bootstrap-3.4.1-dist/css/bootstrap.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./core/bootstrap-4.6.2-dist/css/bootstrap.css"> -->
+    <script type="text/javascript" src="./core/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+    <!-- <script type="text/javascript" src="./core/bootstrap-4.6.2-dist/js/bootstrap.js"></script> -->
+</head>
+
+<body>
+    <!-- 标题 
+        提供了h1-6级标题样式的覆盖，提供了对应的样式类名，为非标题元素设置样式
+        副标题：small标签或类名small-->
+    <h1>标题 1<span class="small">副标题</span></h1>
+    <h2>标题 2</h2>
+    <h3>标题 3<span class="small">副标题</span></h3>
+    <div class="h1">标题<small>副标题</small></div>
+    <hr />
+    <!-- 段落 -->
+    <p>通过.lead来突出强调内容(其作用就是增大字号文本，加粗文本，而且对行高和margin也做相应的处理。)</p>
+    <p class="lead">
+        通过.lead来突出<small>强调</small><b>内容</b>(其作用就是<strong>增大</strong>字号文本，加粗文本，而且对<i>行高</i>和margin也做相应的<em>处理</em>。</p>
+    <hr />
+    <!-- 强调
+    .text-muted:提示，使用浅灰色(#999)
+    .text-primary:主要，使用蓝色(#428bca)
+    .text-success:成功，使用浅绿色(#3c763d)
+    .text-info:通知信息，使用浅蓝色(#31708f)
+    .text-warning:警告，使用黄色(#8a6d3b)
+    .text-danger:危险，使用褐色(#a94442)-->
+    <div class="text-muted">.text-muted:提示，使用浅灰色(#999)</div>
+    <div class="text-primary"> .text-primary:主要，使用蓝色(#428bca)</div>
+    <div class="text-success">.text-success:成功，使用浅绿色(#3c763d)</div>
+    <div class="text-info">.text-info:通知信息，使用浅蓝色(#31708f)</div>
+    <div class="text-warning"> .text-warning:警告，使用黄色(#8a6d3b)</div>
+    <div class="text-danger">.text-danger:危险，使用褐色(#a94442)</div>
+    <hr>
+    <!-- 对齐属性 -->
+    <p class="text-right">Bootstrap通过定义四个类名来控制文本的对齐风格</p>
+    <p class="text-center">Bootstrap通过定义四个类名来控制文本的对齐风格</p>
+    <p class="text-left">Bootstrap通过定义四个类名来控制文本的对齐风格</p>
+    <p class="text-justify">Bootstrap通过定义四个类名来控制文本的对齐风格Bootstrap通过定义四个类名来控制文本的对齐风格Bootstrap通过定义四个类名来控制文本的对齐风格Bootstrap通过定义四个类名来控制文本的对齐风格Bootstrap通过定义四个类名来控制文本的对齐风格通过定义四个类名来控制文本的对齐风格通过定义四个类名来控制文本的对齐风格</p>
+    <hr />
+    <!-- 列表 -->
+    <ul>
+        <li>无序列表1</li>
+        <li>无序列表2</li>
+    </ul>
+    <ol>
+        <li>有序列表</li>
+        <li>有序列表</li>
+    </ol>
+    <dl>
+        <dt>html</dt>
+        <dd>超文本标记</dd>
+        <dt>css</dt>
+        <dd>层叠样式表</dd>
+    </dl>
+    <hr/>
+    <!-- 去点列表 -->
+    <ul class="list-unstyled">
+        <li>首页</li>
+        <li>java学堂</li>
+    </ul>
+    <!-- 内联列表 -->
+    <ul class="list-inline">
+        <li>首页</li>
+        <li>java学堂</li>
+    </ul>
+    <!-- 自定义列表 -->
+    <dl class="dl-horizontal">
+        <dt>html是超文本标记语言</dt>
+        <dd>html是一种超文本标记语言，是一种标识性语言</dd>
+        <dt>测试标题发发发发发发发发发发发发发发发发发发</dt>
+        <dd>这是测试的测试测试发发</dd>
+    </dl>
+    <hr />
+    <!-- 使用code显示单行代码 -->
+    <code><br>
+        this is simple code <br>
+        this is simple code <br>
+        this is simple code
+    </code>
+    <!-- 快捷键 -->
+    <p>使用<kbd>Ctrl</kbd> + <kbd>S</kbd>保存内容</p>
+    <!-- 多行代码 -->
+    <pre>
+        public static void main(String[] args) {
+            System.out.println("hello world");
+        }
+    </pre>
+    <!-- 显示html代码 -->
+    <pre>
+        &lt;h1&gt;hello world&lt;/h1&gt;
+    </pre>
+    <pre class="pre-scrollable">
+        function fetchAndSetPDFThumbnail() {
+            const userValue = reader.userValue;
+            // if (!userValue) return;
+            const formData = new FormData();
+            formData.append('fl', reader.fileValue);
+            var url = getPDFThumbnailAsStream + "?fl=" + reader.fileValue;
+            const eventSource = new EventSource(url);
+            // 监听SSE事件
+            var elementById = document.getElementById('thumbnailView1');
+            elementById.style.height = '78%'
+        
+            eventSource.onmessage = function (event) {
+                // console.log('Received message:', event.data);
+                const data = JSON.parse(event.data);
+                // 检查是否有错误
+                if (data.error) {
+                    console.error("Error: " + data.error);
+                } else {
+                    // console.log(data)
+                    var a = document.createElement('a');
+                    a.href = '#page=' + (data.page);
+                    // 创建一个新的<img>元素
+                    var img = document.createElement('img');
+        
+                    // 设置img的src为Base64编码的图片数据
+                    img.src = data.url;
+        
+                    // 设置图片的样式
+                    img.style.width = '98px'; // 注意：原要求为98px而非100px
+                    img.style.height = '138px'; // 同上，要求为138px而非140px
+                    img.style.border = '1px solid #000'; // 添加边框样式
+        
+                    // 为img元素添加必要的属性，以便于管理和识别
+                    img.setAttribute('aria-label', '页面 ' + data.page + ' 的缩略图');
+                    img.classList.add('thumbnailImage'); // 假设 thumbnailImage 是一个CSS类名
+        
+                    // 查找或创建对应的缩略图容器，并将img元素插入其中
+                    // 注意：原始HTML结构中并没有直接给出每个缩略图的唯一容器标识，这里假设每个缩略图直接附加到elementById下
+                    var thumbnailContainer = document.createElement('div');
+                    // thumbnailContainer.classList.add('thumbnail', 'selected');
+                    thumbnailContainer.classList.add('thumbnail'); // 假设.selected也是一个CSS类名
+                    thumbnailContainer.id = 'page' + data.page;
+                    thumbnailContainer.setAttribute('data-page-number', data.page);
+                    thumbnailContainer.setAttribute('data-loaded', 'true');
+        
+                    // 创建缩略图的选择环元素
+                    var selectionRing = document.createElement('div');
+                    selectionRing.classList.add('thumbnailSelectionRing');
+                    selectionRing.style.width = '100px'; // 或者根据需要调整
+                    selectionRing.style.height = '140px'; // 同上
+        
+                    // 构建完整的结构：selectionRing > img
+                    selectionRing.appendChild(img);
+                    thumbnailContainer.appendChild(selectionRing);
+                    a.appendChild(thumbnailContainer)
+                    elementById.appendChild(a);
+                    // thumbnailContainer.addEventListener('click', function (){
+                    //     thumbnailContainer.classList.add("selected");
+                    // })
+                }
+            };
+            // 处理连接打开事件
+            eventSource.onopen = function () {
+                console.log('SSE connection opened');
+            };
+        
+            // 处理连接关闭事件
+            eventSource.onclose = function () {
+                console.log('SSE connection closed');
+            };
+        
+            // 处理错误事件
+            eventSource.onerror = function (error) {
+                console.error('SSE error:', error);
+                eventSource.close();
+            };
+        }
+    </pre>
+    <table class="table table-bordered table-striped table-hover table-condensed">
+        <thead>
+            <tr class="success">
+                <th>姓名</th>
+                <th>年龄</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="info">
+                <td>张三</td>
+                <td>18</td>
+            </tr>
+            <tr class="warning">
+                <td>李四</td>
+                <td>19</td>
+            </tr>
+            <tr class="danger">
+                <td>张三</td>
+                <td>18</td>
+            </tr>
+            <tr class="active">
+                <td>李四</td>
+                <td>19</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
