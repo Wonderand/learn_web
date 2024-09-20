@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="./core/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="./core/bootstrap-3.4.1-dist/css/bootstrap.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./core/bootstrap-4.6.2-dist/css/bootstrap.css"> -->
+    <script type="text/javascript" src="./core/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+    <!-- <script type="text/javascript" src="./core/bootstrap-4.6.2-dist/js/bootstrap.js"></script> -->
+</head>
+
+<body>
+    <!-- 表单元素 -->
+    <input type="text" name="" id=""><br>
+    <select name="" id="">
+        <option value="">请选择城市</option>
+        <option value="">北京</option>
+        <option value="">上海</option>
+    </select><br>
+    <textarea name="" id="" cols="30" rows="10"></textarea><br>
+    <input type="checkbox" name="bobby">唱歌
+    <input type="checkbox" name="bobby">跳舞
+    <input type="radio" name="sex"> 男
+    <input type="radio" name="sex"> 女
+    <button>默认按钮</button>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- 文本框 -->
+                <input type="text" class="form-control"><br>
+                <input type="text" class="form-control input-lg"><br>
+                <input type="text" class="form-control input-sm"><br>
+            </div>
+        </div>
+        <div class="row">
+            <!-- 下拉框 -->
+            <div class="col-md-6">
+                <select name="" id="" class="form-control">
+                    <option value="">请选择城市</option>
+                    <option value="">北京</option>
+                    <option value="">上海</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <select name="" id="" class="form-control" multiple>
+                    <option value="">请选择城市</option>
+                    <option value="">北京</option>
+                    <option value="">上海</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <!-- 文本域 -->
+            <div class="col-md-3">
+                <textarea class="form-control" name="" id=""></textarea>
+            </div>
+        </div>
+        <!-- 单选和复选框 -->
+        <div class="row">
+
+            <div class="col-md-3">
+                <!-- 垂直显示 -->
+                <div class="checkbox">
+                    <label for="hobby-singing"><input id="hobby-singing" type="checkbox" name="hobby">唱歌</label>
+                </div>
+                <div class="checkbox">
+                    <label for=""><input type="checkbox" name="hobby">跳舞</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- 水平显示 -->
+                <label class="checkbox-inline" for=""><input id="" type="checkbox" name="hobby">唱歌</label>
+                <label class="checkbox-inline" for=""><input type="checkbox" name="hobby">跳舞</label>
+            </div>
+            <div class="col-md-3">
+                <!-- 垂直显示 -->
+                <div class="radio">
+                    <label for=""><input type="radio" name="sex">男</label>
+                </div>
+                <div class="radio">
+                    <label for=""><input type="radio" name="sex">女</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- 水平显示 -->
+                <label class="radio-inline" for=""><input type="radio" name="sex">男</label>
+                <label class="radio-inline" for=""><input type="radio" name="sex">女</label>
+            </div>
+        </div>
+        <!-- 按钮 -->
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn">默认按钮</button>
+                <button class="btn btn-danger">danger按钮</button>
+                <button class="btn btn-success">succese按钮</button>
+                <button class="btn btn-info">info按钮</button>
+                <button class="btn btn-warning">warning按钮</button>
+                <button class="btn btn-primary">primary按钮</button>
+                <button class="btn btn-default">default按钮</button>
+                <button class="btn btn-link">link按钮</button>
+                <a class="btn btn-success" href="#">a标签</a>
+                <span class="btn btn-info">span标签</span>
+                <div class="btn btn-warning">div标签</div>
+            </div>
+        </div>
+        <!-- 按钮大小 -->
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-success btn-xs">超小按钮.btn-xs</button>
+                <button class="btn btn-success btn-sm">小型按钮.btn-sm</button>
+                <button class="btn btn-success">正常按钮.btn-sm</button>
+                <button class="btn btn-success btn-lg">大型按钮.btn-lg</button>                
+            </div>
+        </div>
+        <!-- 按钮禁用 -->
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-info" onclick="alert('hello world')" disabled>按钮真正禁用</button>
+                <button class="btn btn-danger disabled" onclick="alert('hello world')">按钮样式禁用</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
