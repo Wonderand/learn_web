@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link ref="stylesheet" href="./core/bootstrap-3.4.1-dist/css/bootstrap.css">
-    <script type="javascript" src="./core/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./core/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="./core/bootstrap-3.4.1-dist/css/bootstrap.css">
+    <script type="text/javascript" src="./core/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
 </head>
 <body>
-    <input type="button" value="提交" id="input">
+    <!-- <input type="button" value="提交" id="input">
+    <hr>
+    <h1>布局容器</h1> -->
+    <div class="container" style="background-color: antiquewhite; height: 500px;">
+        .container类似于固定宽度并支持响应式布局的容器。        
+    </div>
+
+    <div class="container-fluid" style="background-color: antiquewhite; height: 500px;">
+        .container-fluid的宽度会始终为100%，忽略视口宽度。
+    </div>
 </body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#input").click(function(){
+            alert("hello world");
+        })
+    });
+</script>
 </html>
