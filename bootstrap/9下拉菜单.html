@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="./core/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="./core/bootstrap-3.4.1-dist/css/bootstrap.css">
+    <script type="text/javascript" src="./core/bootstrap-3.4.1-dist/js/bootstrap.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 下拉菜单 -->
+        <div class="btn-group">
+            <div class="dropdown">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    喜欢的频道
+                    <!-- 设置下拉箭头 -->
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-header">====</li>
+                    <li class="active"><a href="#">腾讯</a></li>
+                    <li class="dropdown-header">====</li>
+                    <li><a href="#">网易</a></li>
+                    <li class="dropdown-header">====</li>
+                    <li><a href="#">百度</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                默认 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">功能</a></li>
+                <li><a href="#">另一个功能</a></li>
+                <li><a href="#">其他</a></li>
+                <li class="divider"></li>
+                <li><a href="#">分离的链接</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
